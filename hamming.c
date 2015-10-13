@@ -37,5 +37,7 @@ int main(int argc, char* argv[]){
   free_matrix(result);
   free_matrix(decod);  
   free_matrix(error);
+  free_matrix(randMatrix);
+  
   return 0;
 }
