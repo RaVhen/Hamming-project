@@ -28,5 +28,13 @@ int main(int argc, char* argv[]){
   printm(error);
   printf("\n");
 
+  free_matrix(lucien);
+  free_matrix(puissant);
+  free_matrix(hmatrix);
+  free_matrix(result);
+  free_matrix(decod);
+  free_matrix(error);
+  
+  
   return 0;
 }

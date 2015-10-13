@@ -14,6 +14,9 @@ struct Matrix{
 /* create Matrix r rows c columns */
 Matrix CreateNewMatrix(int r, int c);
 
+/* Free the Matrix */
+void free_matrix(Matrix mat);
+
 /* Print the matrix */
 void printm(Matrix mat);
 

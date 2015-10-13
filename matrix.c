@@ -19,6 +19,14 @@ Matrix CreateNewMatrix(int r, int c){
   return mat;
 }
 
+void free_matrix(Matrix mat){
+  int i;
+  for(i = 0; i < mat.row; i++){
+    free(mat.matrix[i]);
+  }
+  free(mat.matrix);
+}
+
 void printm(Matrix mat){
   int x, y;
   for(x = 0; x < mat.row; x++){
@@ -86,7 +94,6 @@ Matrix decode(Matrix mat){
 
 Matrix transpose(Matrix mat){
   Matrix result = CreateNewMatrix(mat.col, mat.row);
-  printm(result);
   int i,j;
   for(i = 0; i < mat.row; i++){
     for(j = 0; j < mat.col; j++){
