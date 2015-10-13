@@ -23,4 +23,15 @@ void init_Hamming(Matrix mat);
 /* Matrix multiplication */
 Matrix times_Matrix(Matrix mat1, Matrix mat2);
 
+/* Convert static matrix in Matrix format */
+Matrix convert(int r, int c, int mat[r][c]);
+
+/* Decode message */
+Matrix decode(Matrix mat);
+
+/* Transpose matrix */
+Matrix transpose(Matrix mat);
+
+/* Correct matrix */
+Matrix correct(Matrix mat, Matrix hmat);
 #endif
