@@ -37,5 +37,6 @@ int main(int argc, char* argv[]){
   free_matrix(result);
   free_matrix(decod);  
   free_matrix(error);
+  
   return 0;
 }

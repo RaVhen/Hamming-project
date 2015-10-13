@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 typedef struct Matrix Matrix;
 struct Matrix{
@@ -35,6 +36,18 @@ Matrix decode(Matrix mat);
 /* Transpose matrix */
 Matrix transpose(Matrix mat);
 
+/* Copy A into B */
+void copy_Matrix(Matrix mat1, Matrix mat2);
+
 /* Correct matrix */
 Matrix correct(Matrix mat, Matrix hmat);
+
+/* Generate random matrix */
+Matrix random_Matrix(int r, int c);
+
+/* Test if mat1 mat2 are equals */
+int are_equals(Matrix mat1, Matrix mat2);
+
+/* Create noise */
+Matrix noise(Matrix mat, double d);
 #endif

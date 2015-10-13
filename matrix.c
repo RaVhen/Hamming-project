@@ -103,7 +103,70 @@ Matrix transpose(Matrix mat){
   return result;
 }
 
+void copy_Matrix(Matrix mat1, Matrix mat2){
+  int i,j;
+  for(i = 0; i < mat1.row; i++){
+    for(j = 0; j < mat1.col; j++){
+      mat2.matrix[i][j] = mat1.matrix[i][j];
+    }
+  }
+}
+
 Matrix correct(Matrix mat, Matrix hmat){
   Matrix error = times_Matrix(hmat, transpose(mat));
-  return error;
+  Matrix result = CreateNewMatrix(mat.row, mat.col);
+  copy_Matrix(mat, result);
+  if(error.matrix[0][0] == 0
+     && error.matrix[0][1] == 0
+     && error.matrix[0][2] == 0){
+    printf("No error(s) found in the message\n");
+  }
+  else{
+    printf("Error(s) found in message, correcting ...\n");
+    int pos = (error.matrix[0][0] * 4) +
+      (error.matrix[0][0] * 2) +
+      (error.matrix[0][0] * 1) - 1;
+    result.matrix[0][pos] = (result.matrix[0][pos] + 1) % 2;  
+  }
+  return result;
+}
+
+Matrix random_Matrix(int r, int c){
+  Matrix result = CreateNewMatrix(r,c);
+  int i,j;
+  for(i = 0; i < r; i++){
+    for(j = 0; j < c; j++){
+      result.matrix[i][j] = rand() % 2;
+    }
+  }
+  return result;
+}
+
+int are_equals(Matrix mat1, Matrix mat2){
+  int i,j;
+  for(i = 0; i < mat1.row; i++){
+    for(j = 0; j < mat1.col; j++){
+      if(mat1.matrix[i][j] != mat2.matrix[i][j])
+	return 0;
+    }
+  }
+  return 1;
+}
+
+Matrix noise(Matrix mat, double d){
+  Matrix result = CreateNewMatrix(mat.row, mat.col);
+  copy_Matrix(mat, result);
+  int i,j,count;
+  count = 0;
+  for(i = 0; i < result.row; i++){
+    for(j = 0; j < result.col; j++){
+      double r = (double)rand() / (double)RAND_MAX;
+      if(r < d){
+	result.matrix[i][j] = (result.matrix[i][j] + 1) % 2;
+	count++;
+      }
+    }
+  }
+  printf("Alterate %d bits in message\n", count);
+  return result;
 }
