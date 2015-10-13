@@ -4,10 +4,10 @@ Matrix CreateNewMatrix(int r, int c){
   Matrix mat;
   mat.row = r;
   mat.col = c;
-  mat.matrix = (int**)malloc(c * sizeof(int*));
+  mat.matrix = (int**)malloc(r * sizeof(int*));
   int i;
-  for(i = 0; i < c; i++){
-    mat.matrix[i] = (int*)calloc(r, sizeof(int));
+  for(i = 0; i < r; i++){
+    mat.matrix[i] = (int*)calloc(c, sizeof(int));
   }
   int j;
   for(i=0; i < r; i++){
@@ -86,6 +86,7 @@ Matrix decode(Matrix mat){
 
 Matrix transpose(Matrix mat){
   Matrix result = CreateNewMatrix(mat.col, mat.row);
+  printm(result);
   int i,j;
   for(i = 0; i < mat.row; i++){
     for(j = 0; j < mat.col; j++){
