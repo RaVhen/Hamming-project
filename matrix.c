@@ -84,7 +84,9 @@ Matrix convert(int r, int c, int mat[r][c]){
 Matrix encode(Matrix mat){
   Matrix hamming = CreateNewMatrix(4,7);
   init_Hamming(hamming);
-  return (times_Matrix(mat, hamming));
+  Matrix result = times_Matrix(mat, hamming);
+  free_matrix(hamming);
+  return (result);
 }
 
 Matrix decode(Matrix mat){
@@ -123,17 +125,18 @@ Matrix correct(Matrix mat, Matrix hmat){
   Matrix result = CreateNewMatrix(mat.row, mat.col);
   copy_Matrix(mat, result);
   if(error.matrix[0][0] == 0
-     && error.matrix[0][1] == 0
-     && error.matrix[0][2] == 0){
-    printf("No error(s) found in the message\n");
+     && error.matrix[1][0] == 0
+     && error.matrix[2][0] == 0){
+    /*printf("No error(s) found in the message\n");*/
   }
   else{
-    printf("Error(s) found in message, correcting ...\n");
+    /*printf("Error(s) found in message, correcting ...\n");*/
     int pos = (error.matrix[0][0] * 4) +
-      (error.matrix[0][0] * 2) +
-      (error.matrix[0][0] * 1) - 1;
+      (error.matrix[1][0] * 2) +
+      (error.matrix[2][0] * 1) - 1;
     result.matrix[0][pos] = (result.matrix[0][pos] + 1) % 2;  
   }
+  free_matrix(error);
   return result;
 }
 
@@ -173,6 +176,6 @@ Matrix noise(Matrix mat, double d){
       }
     }
   }
-  printf("Alterate %d bits in message\n", count);
+  /*printf("Alterate %d bits in message\n", count);*/
   return result;
 }
