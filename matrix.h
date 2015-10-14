@@ -30,6 +30,9 @@ Matrix times_Matrix(Matrix mat1, Matrix mat2);
 /* Convert static matrix in Matrix format */
 Matrix convert(int r, int c, int mat[r][c]);
 
+/* Encode message */
+Matrix encode(Matrix mat);
+
 /* Decode message */
 Matrix decode(Matrix mat);
 

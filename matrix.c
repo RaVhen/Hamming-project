@@ -81,6 +81,12 @@ Matrix convert(int r, int c, int mat[r][c]){
   return result;
 }
 
+Matrix encode(Matrix mat){
+  Matrix hamming = CreateNewMatrix(4,7);
+  init_Hamming(hamming);
+  return (times_Matrix(mat, hamming));
+}
+
 Matrix decode(Matrix mat){
   Matrix result = CreateNewMatrix(mat.row, mat.col - 3);
   int i,j;
