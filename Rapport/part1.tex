@@ -1,0 +1,91 @@
+\section{Exercice 1 : Sur papier}
+\subsection{Encodage du message $m=(1,1,0,1)$}
+Pour encoder le message $m=(1,1,0,1)$, il faut multiplier ce message par la matrice génératrice $G$ donnée. La matrice génératrice $G$ est de la forme suivante :
+
+\begin{equation}
+ G=
+\begin{pmatrix}
+    1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+    0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 & 1 & 1 & 1
+   \end{pmatrix}
+\end{equation}
+Ainsi, en multipliant $m$ et $G$, nous obtenons le message $m_e$ suivant :
+\begin{equation}
+ m_e=m\times G=(1,1,0,1)\times
+ \begin{pmatrix}
+    1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+    0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 & 1 & 1 & 1
+   \end{pmatrix}
+   =(1,1,0,1,0,0,1)
+\end{equation}
+\subsection{Vérification que $H$ est bien une matrice de contrôle}
+Afin de vérifier si un mot de code reçu comporte des erreurs, il est possible multiplier ce dernier à une matrice de contrôle, $H$. Ici, la matrice $H$ est de la forme suivante :
+\begin{equation}
+ H=
+ \begin{pmatrix}
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 1 & 0 & 1 & 0 & 1
+ \end{pmatrix}
+\end{equation}
+Afin de vérifier si cette matrice est bien un matrice de contrôle, nous allons vérifier cela avec notre mot encodé $m_e$.\\
+Pour ce faire, nous allons multiplier $m_e$ et $H$. Nous obtiendrons alors deux résultats possibles :
+\begin{itemize}
+ \item Si le résultat $s$ est égal $(0,0,0)$, alors il n'y a aucune faute dans le mot code.
+ \item Si le résultat $s$ n'est pas égal à $(0,0,0)$, alors le mot code comporte au moins une erreur. 
+\end{itemize}
+Ici, nous utiliserons un mot code que nous savons correct. Le résultat devra obligatoirement être égal à $(0,0,0)$ sauf si $H$ n'es pas une matrice de contrôle.
+\begin{equation}
+ s=H\times m_e=
+  \begin{pmatrix}
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 1 & 0 & 1 & 0 & 1
+ \end{pmatrix}
+ \times(1,1,0,1,0,0,1)=(0,0,0)
+\end{equation}
+Ainsi, nous savons que la matrice de contrôle $H$ est correcte.
+\subsection{Vérification que $(1,1,1,1,1,1,1)$ est bien un de code}
+Afin de vérifier si le message $c_2=(1,1,1,1,1,1,1)$ est bien un mot code, nous allons le multiplier avec la matrice de contrôle $H$ et observer le résultat :
+\begin{equation}
+ s_2=H\times c_2=
+  \begin{pmatrix}
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 1 & 0 & 1 & 0 & 1
+ \end{pmatrix}
+ \times(1,1,1,1,1,1,1)=(0,0,0)
+\end{equation}
+Le résultat $s_2$ étant bien égal à $(0,0,0)$, le mot encodé $c_2=(1,1,1,1,1,1,1)$ est bien un mot code. ce dernier, décodé est le mot $(1,1,1,1)$.
+\subsection{Réception et correction du message $c'=(1,1,1,1,0,0,1)$}
+Le mot de code reçu, $c'=(1,1,1,1,0,0,1)$, n'est pas un mot de code. pour le vérifier, nous allons multiplier $c'$ à la matrice $H$ de contrôle :
+\begin{equation}
+ s_3=H\times c'=
+  \begin{pmatrix}
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 1 & 0 & 1 & 0 & 1
+ \end{pmatrix}
+ \times(1,1,1,1,0,0,1)=(0,1,1)
+\end{equation}
+Comme nous pouvons le constater, le résultat $s_3=(0,1,1)$ est différent de $(0,0,0)$. Nous pouvons alors noter que $c'$ n'est pas un mot de code. \\
+Cependant, nous savons qu'il ne comporte qu'une seule erreur. De plus, nous pouvons déduire grâce au résultat de $s_3$ connaître la position de ce bit erroné. En effet, en lisant le résultat $s_3$ en binaire (ici, $011=3$ en décimal), nous savons que l'erreur a été faite sur le troisième bit.\\
+Nous obtenons alors le mot de code suivant :
+\begin{equation}
+ c'_2=(1,1,0,1,0,0,1)
+\end{equation}
+Afin de vérifier si cette correction est la bonne, nous allons vérifier que ce dernier est correct : 
+\begin{equation}
+ s_4=H\times c'_2=
+  \begin{pmatrix}
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 1 & 0 & 1 & 0 & 1
+ \end{pmatrix}
+ \times(1,1,0,1,0,0,1)=(0,0,0)
+\end{equation}
+Le résultat $s_4$ étant bien égal à $(0,0,0)$, nous pouvons conclure que $c'_2$ est bien un mot de code. Il peut être décodé en mot $m_{c'}=(1,1,0,1)$.
