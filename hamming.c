@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
   int n;
 
   
-  for(i = 1; i < 2; i++){
+  for(i = 1; i < 500; i++){
     p = (double)i / (double)1000;
   
     printf("\n");
@@ -31,11 +31,11 @@ int main(int argc, char* argv[]){
 
     int success, fail, total;
     double proba;
-    for(n = 0; n <= 0; n++){
       success = 0;
       fail = 0;
       proba = 0;
       total = 0;
+    for(n = 0; n <= 500; n++){
       Matrix randMatrix = random_Matrix(1,4);
       /*printf("Random message is:\n");
 	printm(randMatrix);*/
